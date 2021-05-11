@@ -1,11 +1,11 @@
 import * as React from 'react'
 import './Card.css'
 
-export default ({ active }) => {
+export default ({ question, answer, active, id }) => {
   return (
     <section className="Card">
-      <h2>Title</h2>
-      <p>Lorem ipsum dolor sit.</p>
+      <h2>{question}</h2>
+      <p>{answer}</p>
       <div className={active ? 'bookmark active' : 'bookmark'}></div>
     </section>
   )
