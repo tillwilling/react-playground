@@ -20,7 +20,7 @@ export default () => {
   return (
     <div>
       {quiz.map(({ question, answer, active, id }) => (
-        <Card question={question} answer={answer} active={active} />
+        <Card question={question} answer={answer} active={active} id={id} />
       ))}
     </div>
   )
