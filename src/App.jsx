@@ -1,29 +1,45 @@
-import * as React from 'react'
-import Card from './Card'
-
-const quiz = [
-  {
-    question: 'Wie hieß das erste Computerspiel?',
-    answer: 'Spacewar!',
-    active: false,
-    tags: ['Computer', 'Games', 'Retro', 'Entertainment'],
-    id: 1,
-  },
-  {
-    question: 'Wann wurde das erste Computerspiel erfunden?',
-    answer: '1961',
-    active: true,
-    tags: ['Computer', 'Games', 'Retro', 'Entertainment'],
-    id: 2,
-  },
-]
+import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import './App.css'
 
 export default () => {
+  const [todos, setTodos] = useState([])
   return (
-    <div>
-      {quiz.map(({ question, answer, active, tags, id }) => (
-        <Card question={question} answer={answer} active={active} tags={tags} />
-      ))}
+    <div className="App">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Add todo:
+          <input name="todo" type="text" />
+        </label>
+        <button>Add</button>
+      </form>
+      <ul>
+        {todos.map(({ text, isDone, id }) => (
+          <li onClick={() => toggleIsDone(id)} key={id}>
+            {text} {isDone && '✅'} 
+          </li>
+        ))}
+      </ul>
     </div>
   )
+
+  function toggleIsDone(id) {
+    const index = todos.findIndex(todo => todo.id === id)
+    const todo = todos[index]
+    setTodos([
+      ...todos.slice(0, index),
+      { ...todo, isDone: !todo.isDone },
+      ...todos.slice(index + 1),
+    ])
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    const form = event.target
+    const input = form.elements.todo
+    const newTodo = { text: input.value, isDone: false, id: uuidv4() }
+    setTodos([newTodo, ...todos])
+    form.reset()
+    input.focus()
+  }
 }
