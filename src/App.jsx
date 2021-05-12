@@ -21,7 +21,7 @@ const quiz = [
 export default () => {
   return (
     <div>
-      {quiz.map(({ question, answer, active, id }) => (
+      {quiz.map(({ question, answer, active, tags, id }) => (
         <Card question={question} answer={answer} active={active} tags={tags} />
       ))}
     </div>
