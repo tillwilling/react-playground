@@ -23,3 +23,10 @@
   border-left: 10px solid hotpink;
   border-right: 10px solid hotpink;
 }
+
+.Tags {
+  background: goldenrod;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+}
